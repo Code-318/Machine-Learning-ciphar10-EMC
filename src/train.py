@@ -1,18 +1,18 @@
 import tensorflow as tf
 import matplotlib.pyplot as plt
 
-# Load CIFAR-10
+# load the CIFAR-10 db
 (x_train, y_train), (x_test, y_test) = tf.keras.datasets.cifar10.load_data()
 
 print("Training images:", x_train.shape)
 print("Test images:", x_test.shape)
 
-# Normalize the images
-# Original pixels are 0-255, so convert them to 0-1
+# fix the images
+# convert them to 0-1
 x_train = x_train / 255.0
 x_test = x_test / 255.0
 
-# Build a CNN
+# build CNN
 model = tf.keras.Sequential([
     tf.keras.layers.Conv2D(32, (3, 3), activation="relu",
                            input_shape=(32, 32, 3)),
@@ -42,7 +42,7 @@ history = model.fit(
     validation_split=0.1
 )
 
-# Test the model on test images
+# test the model on test images
 test_loss, test_accuracy = model.evaluate(x_test, y_test)
 
 print("Test loss:", test_loss)
@@ -54,6 +54,7 @@ plt.plot(history.history["val_accuracy"], label="Validation accuracy")
 plt.xlabel("Epoch")
 plt.ylabel("Accuracy")
 plt.legend()
+# save the figures
 plt.savefig("results/figures/baseline_accuracy.png", dpi=300, bbox_inches="tight")
 plt.savefig("tests/baseline/baseline_accuracy.png", dpi=300, bbox_inches="tight")
 plt.show()
