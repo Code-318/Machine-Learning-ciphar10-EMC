@@ -1,5 +1,4 @@
-When started, we should all use the same version of the following:
--tensorflow
--numpy
--matplotlib
-(jupyter?)
+tensorflow
+numpy
+matplotlib
+jupyter
