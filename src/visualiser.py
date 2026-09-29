@@ -2,6 +2,8 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 import random
 
+(x_train, y_train), (x_test, y_test) = tf.keras.datasets.cifar10.load_data()
+
 random_index = random.randint(0, len(x_train) - 1)
 
 sample_image = x_train[random_index]
