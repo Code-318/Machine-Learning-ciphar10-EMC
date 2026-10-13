@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 print("Training images:", x_train.shape)
 print("Test images:", x_test.shape)
 
-# fix the images
-# convert them to 0-1
+# normalise the images
+# convert them to 0-1 from RGB
 x_train = x_train / 255.0
 x_test = x_test / 255.0
 
