@@ -10,8 +10,8 @@ train_images, test_images = train_images / 255.0, test_images / 255.0
 class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer',
                'dog', 'frog', 'horse', 'ship', 'truck']
 
-# shows first images of cifar-1 dataset
-'''plt.figure(figsize=(10,10))
+"""# shows first images of cifar-1 dataset
+plt.figure(figsize=(10,10))
 for i in range(25):
     plt.subplot(5,5,i+1)
     plt.xticks([])
@@ -21,7 +21,7 @@ for i in range(25):
     # The CIFAR labels happen to be arrays, 
     # which is why you need the extra index
     plt.xlabel(class_names[train_labels[i][0]])
-plt.show()'''
+plt.show()"""
 
 # Defines convolutional base with Conv2D and MaxPooling
 # relu sets negatives to 0 introducing non-linearity
@@ -43,17 +43,19 @@ model.summary()
 
 model.compile(optimizer='adam',
               loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
-              metrics=['accuracy'])
+              metrics=['training accuracy'])
 
-history = model.fit(train_images, train_labels, epochs=10, 
+history = model.fit(train_images, train_labels, epochs=20, 
                     validation_data=(test_images, test_labels))
 
-plt.plot(history.history['accuracy'], label='accuracy')
-plt.plot(history.history['val_accuracy'], label = 'val_accuracy')
+plt.plot(history.history['training accuracy'], label='training accuracy')
+plt.plot(history.history['validation accuracy'], label = 'validation accuracy')
 plt.xlabel('Epoch')
 plt.ylabel('Accuracy')
 plt.ylim([0.5, 1])
 plt.legend(loc='lower right')
+plt.savefig("results/figures/adam_accuracy.png", dpi=300, bbox_inches='tight')
+plt.show()
 
 test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
 
