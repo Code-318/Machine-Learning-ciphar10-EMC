@@ -49,11 +49,23 @@ print("Test loss:", test_loss)
 print("Test accuracy:", test_accuracy)
 
 # plot training/validation accuracy
-plt.plot(history.history["accuracy"], label="Training accuracy")
-plt.plot(history.history["val_accuracy"], label="Validation accuracy")
+
+colours = ['dimgrey','grey','darkgrey','lightgrey','whitesmoke']
+
+plt.figure(facecolor='lightsteelblue')
+for i in range(5):
+    width = len(history.history["val_accuracy"])/6
+    plt.axvspan(i*width, (i+1)*width, color=colours[i])
+    
+plt.plot(history.history["accuracy"], color='navy', linestyle="dashed", label="Training accuracy")
+plt.plot(history.history["val_accuracy"], color='royalblue', label="Validation accuracy")
 plt.xlabel("Epoch")
 plt.ylabel("Accuracy")
 plt.legend()
+ax = plt.gca()
+ax.set_facecolor("lightsteelblue")
+
+
 # save the figures
 plt.savefig("results/figures/baseline_accuracy.png", dpi=300, bbox_inches="tight")
 plt.savefig("tests/baseline/baseline_accuracy.png", dpi=300, bbox_inches="tight")
